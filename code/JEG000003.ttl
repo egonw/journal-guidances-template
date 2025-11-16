@@ -1,0 +1,10 @@
+PREFIX egt: <https://egonw.github.io/journal-guidances-template/type/>
+PREFIX egp: <https://egonw.github.io/journal-guidances-template/property/>       
+PREFIX this: <https://egonw.github.io/journal-guidances-template/code/JEG000003>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX cito: <http://purl.org/net/cito/>
+
+this: a egt:Guidance ;
+  rdfs:label "Output is published with an open license." ;
+  dct:description """The research output is published with an open license that allows modification and (commercial) redistribution, like CC-BY.""" .
