@@ -39,8 +39,7 @@ SELECT ?title ?description WHERE {
 
 metadata = rdf.sparql(store, metadataQuery)
 
-println metadata
-
+// println metadata
 
 ui.append(outFile, "## " + metadata.get(1, "title") + "\n")
 ui.append(outFile, "\n")
@@ -54,7 +53,7 @@ SELECT ?citation WHERE {
 
 metadata = rdf.sparql(store, metadataQuery)
 
-println metadata
+// println metadata
 
 if (metadata.getRowCount() > 0) {
   ui.append(outFile, "Read more in [");
