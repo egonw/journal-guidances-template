@@ -7,5 +7,6 @@ PREFIX cito: <http://purl.org/net/cito/>
 
 this: a egt:Guidance ;
   rdfs:label "Cited webpages are archived" ;
-  dct:description """Websites cited in the reference list are archived, e.g. with Internet Archive.""" ;
+  dct:description """Websites cited in the reference list are archived, e.g. with Internet Archive. This
+    can be done when the article is accepted, submitted, or both.""" ;
   cito:cites <https://doi.org/10.59350/q8zfm-45s98> .

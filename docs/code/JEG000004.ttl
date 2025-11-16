@@ -1,0 +1,12 @@
+PREFIX egt: <https://egonw.github.io/journal-guidances-template/type/>
+PREFIX egp: <https://egonw.github.io/journal-guidances-template/property/>       
+PREFIX this: <https://egonw.github.io/journal-guidances-template/code/JEG000004>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX cito: <http://purl.org/net/cito/>
+
+this: a egt:Guidance ;
+  rdfs:label "Metadata about the output is shared as public domain or CCZero" ;
+  dct:description """Metadata is shared as public domain or CCZero, and includes statements about authorship, copyright ownership, title, publication date, abstract, etc.""" ;
+  cito:cites <https://doi.org/10.1162/qss_a_00023> ,
+    <https://doi.org/10.5281/zenodo.4047456> .
