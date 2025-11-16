@@ -1,0 +1,12 @@
+PREFIX egt: <https://egonw.github.io/journal-guidances-template/type/>
+PREFIX egp: <https://egonw.github.io/journal-guidances-template/property/>       
+PREFIX this: <https://egonw.github.io/journal-guidances-template/code/JEG000001>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX cito: <http://purl.org/net/cito/>
+
+this: a egt:Guidance ;
+  rdfs:label "Citations have CiTO intention annotations" ;
+  dct:description """Citations can be annotated with Citation Typing Ontology intention annotations.
+    Such annotations help the reader understand why a certain article is cited.""" ;
+  cito:cites <https://doi.org/10.1186/s13321-023-00684-1> .

@@ -1,11 +1,10 @@
-# Template repository for Markdown content with executed Groovy scripts
-
+# Journal Editorial Guidances
 
 **Egon L. Willighagen**
 
-© 2020 The Authors
+© 2025 The Authors
 
-License: MIT
+License: CC-BY
 
 ## Contents
 

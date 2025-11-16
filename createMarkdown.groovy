@@ -2,6 +2,8 @@
 //
 // GPL v3
 
+import groovy.xml.XmlSlurper
+
 input = args[0]
 
 bibliography = new HashMap<String,String>();
@@ -49,14 +51,34 @@ currentChapterCounter = chapterCounters.get(context)
 
 lines = new File(input).readLines()
 lines.each { String line ->
-  if (line.startsWith("<code>")) {
+  if (line.startsWith("<guidance>")) {
     def instruction = new XmlSlurper().parseText(line)
-    def srcLines = new File("code/${instruction.text()}.verbatim.md").readLines()
-    srcLines.each { String srcLine -> println srcLine }
-  } else if (line.startsWith("<out>")) {
-    def instruction = new XmlSlurper().parseText(line)
-    def srcLines = new File("code/${instruction.text()}.out").readLines()
-    srcLines.each { String srcLine -> println srcLine }
+    def srcLines = new File("code/${instruction.text()}.md").readLines()
+    srcLines.each { String srcLine ->
+      while (srcLine.contains("<cite>")) {
+        citeStart = srcLine.indexOf("<cite>")
+        citeEnd = srcLine.indexOf("</cite>")
+        cites = srcLine.substring(citeStart+6, citeEnd)
+        if (cites.isEmpty()) cites = "?"
+        replacement = ""
+        if (!references.containsKey(cites)) {
+          refCounter++
+          references.put(cites, "" + refCounter)
+          bibList += "${refCounter}. <a name=\"citeref${refCounter}\"></a>"
+          if (bibliography.get(cites) != null) {
+            bibList += bibliography.get(cites) + "\n"
+          } else {
+            bibList += "Missing\n"
+          }
+          replacement = "<a href=\"#citeref${refCounter}\">${refCounter}</a>"
+        } else {
+          existingCounter = Integer.valueOf(references.get(cites))
+          replacement = "<a href=\"#citeref${existingCounter}\">${existingCounter}</a>"
+        }
+        srcLine = srcLine.substring(0, citeStart) + replacement + srcLine.substring(citeEnd+7)
+      }
+      println srcLine
+    }
   } else if (line.startsWith("<section")) {
     def instruction = new XmlSlurper().parseText(line)
     println "<a name=\"sec:${instruction.@label}\"></a>"

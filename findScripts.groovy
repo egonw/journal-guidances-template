@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2019  Egon Willighagen <egon.willighagen@gmail.com>
+// Copyright (c) 2011-2025  Egon Willighagen <egon.willighagen@gmail.com>
 //
 // GPL v3
 
@@ -21,15 +21,10 @@ files = basedir.listFiles().grep(~/.*i.md$/)
 files.each { file ->
   file.eachLine { line ->
     try {
-      if (line.contains("<code>")) {
-        start = line.indexOf("<code>")
-        end = line.indexOf("</code>")
-        text = line.substring(start + 6, end)
-        println "" + text + suffix
-      } else if (line.contains("<out>")) {
-        start = line.indexOf("<out>")
-        end = line.indexOf("</out>")
-        text = line.substring(start + 5, end)
+      if (line.contains("<guidance>")) {
+        start = line.indexOf("<guidance>")
+        end = line.indexOf("</guidance>")
+        text = line.substring(start + 10, end)
         println "" + text + suffix
       }
     } catch (Exception exception) {

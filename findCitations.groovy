@@ -29,3 +29,20 @@ files.each { file ->
   }
 }
 
+basedir = new File(folder + "/code")
+// println "basedir: " + basedir
+files = basedir.listFiles().grep(~/.*md$/)
+files.each { file ->
+  // println "Find citations in ${file}" 
+  file.eachLine { line ->
+    while (line.contains("<cite>")) {
+      citeStart = line.indexOf("<cite>")
+      citeEnd = line.indexOf("</cite>")
+      cites = line.substring(citeStart+6, citeEnd)
+      if (!cites.isEmpty()) {
+        println cites
+      }
+      line = line.substring(0, citeStart) + line.substring(citeEnd+7)
+    }
+  }
+}

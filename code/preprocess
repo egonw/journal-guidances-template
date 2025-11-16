@@ -1,82 +1,67 @@
-// Copyright (c) 2009-2020  Egon Willighagen <egon.willighagen@gmail.com>
+// Copyright (c) 2025  Egon Willighagen <egon.willighagen@gmail.com>
 //
 // GPL v3
+
+@Grab(group='io.github.egonw.bacting', module='managers-ui', version='1.0.7')
+@Grab(group='io.github.egonw.bacting', module='managers-rdf', version='1.0.7')
 
 import java.io.*;
 import java.util.*;
 
-GROOVY = ".groovyin";
-GROOVYL = ".groovylin";
+workspaceRoot = ".."
+ui = new net.bioclipse.managers.UIManager(workspaceRoot);
+bioclipse = new net.bioclipse.managers.BioclipseManager(workspaceRoot);
+rdf = new net.bioclipse.managers.RDFManager(workspaceRoot);
+
+TTL = ".ttl";
 
 inFile = args[0];
 
-ending = "in";
-if (inFile.endsWith(GROOVY)) {
-  suffix = GROOVY;
-  templateFile = "source.groovy.template";
-} else if (inFile.endsWith(GROOVYL)) {
-  suffix = GROOVYL;
-  templateFile = "source.groovy.template";
+ending = "ttl";
+if (inFile.endsWith(TTL)) {
+  suffix = TTL;
 } else {
   println "Unsupported processing of ${inFile}"
   System.exit(-1);
 }
 
-// read the input
-reader = new BufferedReader(
-  new FileReader(new File(inFile))
-);
-imports = new StringBuffer();
-source = new StringBuffer();
-line = reader.readLine();
-while (line != null) {
-  if (line.trim().length() > 0) {
-    if (line.charAt(0) == '#') {
-      code = line.substring(1);
-      if (code.startsWith("import")) {
-        imports.append(code+"\n");
-      } else {
-        source.append(code+"\n");
-      }
-    } else if (line.charAt(0) == '%') {
-      tex.append(line.substring(1)+"\n");
-    } else {
-      if (line.startsWith("import")) {
-        imports.append(line+"\n");
-      } else {
-        source.append(line+"\n");
-      }
-    }
+outFile = "/code/" + inFile.replace(".ttl", ".md")
+
+store = rdf.createInMemoryStore()
+rdf.importFile(store, "/code/" + inFile, "TURTLE")
+
+metadataQuery = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?title ?description WHERE {
+  ?guidance rdfs:label ?title ;
+    dct:description ?description .
+}"""
+
+metadata = rdf.sparql(store, metadataQuery)
+
+println metadata
+
+
+ui.append(outFile, "## " + metadata.get(1, "title") + "\n")
+ui.append(outFile, "\n")
+ui.append(outFile, "Description: " + metadata.get(1, "description") + "\n")
+ui.append(outFile, "\n")
+
+metadataQuery = """PREFIX cito: <http://purl.org/net/cito/>
+SELECT ?citation WHERE {
+  ?guidance cito:cites ?citation .
+}"""
+
+metadata = rdf.sparql(store, metadataQuery)
+
+println metadata
+
+if (metadata.getRowCount() > 0) {
+  ui.append(outFile, "Read more in [");
+  for (citation in metadata.getColumn("citation")) {
+    doi = citation.replace("https://doi.org/","").replace("http://doi.org/","")
+    ui.append(outFile, "<cite>${doi}</cite>")
   }
-  line = reader.readLine();
+  ui.append(outFile, "].\n");
 }
 
-// create source file
-template = new BufferedReader(
-  new FileReader(new File(templateFile))
-);
-runClass = inFile.substring(0,inFile.indexOf(suffix));
-runExt = suffix.substring(1,suffix.indexOf(ending));
-runFile = runClass + "." + runExt;
-runWriter = new FileWriter(
-  new File(runFile)
-);
-line = template.readLine();
-while (line != null) {
-  if (line.trim().length() > 0) {
-    if (line.contains("%TESTCLASS%")) {
-      line = line.replace("%TESTCLASS%", runClass);
-      runWriter.write(line);
-    } else if (line.contains("%IMPORTS%")) {
-      line = line.replace("%IMPORTS%", imports.toString());
-      runWriter.write(line);
-    } else if (line.contains("%CODE%")) {
-      line = line.replace("%CODE%", source.toString());
-      runWriter.write(line);
-    } else {
-      runWriter.write(line+"\n");
-    }
-  }
-  line = template.readLine();
-}
-runWriter.close();

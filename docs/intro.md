@@ -1,33 +1,18 @@
 # Introduction
 
-## Including Groovy code examples
+The quality of a journal is partly defined by the people that peer review for the journal. But it also partly
+is the editorial standards set by the journal. These guidances give context to the peer review, and empower and guide
+the reviewer in their work. In fact, it even guides the authors before the submit to this journal.
 
-This is how you include a script:
+However, while there are generally some best practices, lost standards, and total no-go's, editorial guidances
+are not FAIR. This overview will change that. It documents guidances, make them FAIR, give them scholarly context,
+and provide help on how to use them in your writen, peer review, and editorial work.
 
-**Script** [code/Example.groovy](code/Example.code.md)
-```groovy
-@Grab(group='org.openscience.cdk', module='cdk-bundle', version='2.3')
-import org.openscience.cdk.smiles.SmilesParser;
-import org.openscience.cdk.interfaces.*;
-import org.openscience.cdk.*;
-sp = new SmilesParser(
-  DefaultChemObjectBuilder.getInstance()
-)
-mol = sp.parseSmiles("CC(=O)OC1=CC=CC=C1C(=O)O")
-println "Aspirin has ${mol.atomCount} atoms."
-```
-
-And this is how to include the output:
-
-Aspirin has 13 atoms.
-
-## Including references
-
-You can include references by proviing the Wikidata item identifier
-for the paper, e.g. like [<a href="#citeref1">1</a>].
+Better, there will be guidance on how to use the FAIR guidances to create an editorial handbook for your
+journal where you can select the items that matter to you and indicate if they are requirements (MUSTs),
+suggestions (SHOULDs), or welcomed practices (MAYs).
 
 ## References
 
-1. <a name="citeref1"></a>Willighagen L, Willighagen LG. Citation.js: a format-independent, modular bibliography tool for the browser and command line. PeerJ Comput Sci. 2019 Aug 12;5:e214.  doi:[10.7717/PEERJ-CS.214](https://doi.org/10.7717/PEERJ-CS.214) ([Scholia](https://tools.wmflabs.org/scholia/doi/10.7717/PEERJ-CS.214))
 
 

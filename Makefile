@@ -1,5 +1,5 @@
-SOURCES := intro.i.md index.i.md chapter2.i.md
-TARGETS := intro.md indexList.md chapter2.md
+SOURCES := ${shell ls -1 *.i.md | grep -v indexList.i.md }
+TARGETS := ${shell ls -1 *.i.md | sed -e 's/.i.md/.md/' | grep -v index.md }
 METAS := references.dat toc.txt indexList.i.md sections.txt
 
 SUBDIRS := code
@@ -7,7 +7,7 @@ SUBDIRS := code
 all: ${SUBDIRS} ${METAS} ${TARGETS} index.md
 	@mkdir -p docs/code/
 	@mv ${TARGETS} docs/
-	@cp code/*.code.md docs/code/
+	@cp code/*.md docs/code/
 
 sections.txt: order.txt ${SOURCES}
 	@echo "Indexing the sections"
@@ -27,7 +27,7 @@ topics.tsv: ${SOURCES} findTopics.groovy
 
 references.qids: findCitations.groovy
 	@echo "Finding the citations"
-	@groovy findCitations.groovy . | grep "^Q" | sort | uniq > references.qids
+	@groovy findCitations.groovy . | grep "^10" | sort | uniq > references.qids
 
 references.dat: references.qids references.js
 	@nodejs references.js
