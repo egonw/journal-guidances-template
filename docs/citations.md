@@ -1,6 +1,6 @@
 # Citations
 
-# Citations have CiTO intention annotations
+## Citations have CiTO intention annotations
 
 Description: Citations can be annotated with Citation Typing Ontology intention annotations.
     Such annotations help the reader understand why a certain article is cited.
