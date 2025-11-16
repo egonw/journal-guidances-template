@@ -26,6 +26,7 @@ if (inFile.endsWith(TTL)) {
 }
 
 outFile = "/code/" + inFile.replace(".ttl", ".md")
+ui.renewFile(outFile)
 
 store = rdf.createInMemoryStore()
 rdf.importFile(store, "/code/" + inFile, "TURTLE")

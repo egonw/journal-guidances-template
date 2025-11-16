@@ -9,4 +9,6 @@ this: a egt:Guidance ;
   rdfs:label "Citations have CiTO intention annotations" ;
   dct:description """Citations can be annotated with Citation Typing Ontology intention annotations.
     Such annotations help the reader understand why a certain article is cited.""" ;
-  cito:cites <https://doi.org/10.1186/s13321-023-00684-1> .
+  cito:cites <https://doi.org/10.1186/s13321-023-00683-2> ,
+    <https://doi.org/10.1186/2041-1480-1-s1-s6> ,
+    <https://doi.org/10.1186/s13321-020-00448-1> .

@@ -1,0 +1,12 @@
+PREFIX egt: <https://egonw.github.io/journal-guidances-template/type/>
+PREFIX egp: <https://egonw.github.io/journal-guidances-template/property/>       
+PREFIX this: <https://egonw.github.io/journal-guidances-template/code/JEG000002>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX cito: <http://purl.org/net/cito/>
+
+this: a egt:Guidance ;
+  rdfs:label "Cited webpages are archived" ;
+  dct:description """Websites cited in the reference list are archived, e.g. with Internet Archive. This
+    can be done when the article is accepted, submitted, or both.""" ;
+  cito:cites <https://doi.org/10.59350/q8zfm-45s98> .
