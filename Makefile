@@ -8,6 +8,7 @@ all: ${SUBDIRS} ${METAS} ${TARGETS} index.md
 	@mkdir -p docs/code/
 	@mv ${TARGETS} docs/
 	@cp code/*.md docs/code/
+	@cp code/*.ttl docs/code/
 
 sections.txt: order.txt ${SOURCES}
 	@echo "Indexing the sections"
