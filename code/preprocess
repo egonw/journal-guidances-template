@@ -43,7 +43,7 @@ metadata = rdf.sparql(store, metadataQuery)
 
 ui.append(outFile, "## " + metadata.get(1, "title") + "\n")
 ui.append(outFile, "\n")
-ui.append(outFile, "Description: " + metadata.get(1, "description") + "\n")
+ui.append(outFile, "**Description**: " + metadata.get(1, "description") + "\n")
 ui.append(outFile, "\n")
 
 metadataQuery = """PREFIX cito: <http://purl.org/net/cito/>
