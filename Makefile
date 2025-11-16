@@ -1,14 +1,22 @@
 SOURCES := ${shell ls -1 *.i.md | grep -v indexList.i.md }
 TARGETS := ${shell ls -1 *.i.md | sed -e 's/.i.md/.md/' | grep -v index.md }
+CODES := ${shell ls -1 code/*.ttl | sed -e 's/^\(.*\).ttl/docs\/\1.md/' }
 METAS := references.dat toc.txt indexList.i.md sections.txt
 
-SUBDIRS := code
-
-all: ${SUBDIRS} ${METAS} ${TARGETS} index.md
+all: ${METAS} ${TARGETS} index.md ${CODES}
 	@mkdir -p docs/code/
 	@mv ${TARGETS} docs/
 	@cp code/*.md docs/code/
 	@cp code/*.ttl docs/code/
+
+docs/code/%.md: code/%.md
+	@cp $< tmp.md
+	@echo "\n## References\n\n<references/>\n" >> tmp.md
+	@groovy createMarkdown.groovy tmp.md > $@
+	@rm tmp.md
+
+code/%.md: code/%.ttl
+	cd code; make $<
 
 sections.txt: order.txt ${SOURCES}
 	@echo "Indexing the sections"
