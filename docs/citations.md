@@ -11,12 +11,16 @@ dissemination.
 
 Read more in [<a href="#citeref1">1</a><a href="#citeref2">2</a><a href="#citeref3">3</a>].
 
+[Details](https://egonw.github.io/journal-guidances-template/code/JEG000001)
+
 ## Cited webpages are archived
 
 **Description**: Websites cited in the reference list are archived, e.g. with Internet Archive. This
     can be done when the article is accepted, submitted, or both.
 
 Read more in [<a href="#citeref4">4</a>].
+
+[Details](https://egonw.github.io/journal-guidances-template/code/JEG000002)
 
 ## References
 

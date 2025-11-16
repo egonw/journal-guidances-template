@@ -79,6 +79,8 @@ lines.each { String line ->
       }
       println srcLine
     }
+    println ""
+    println "[Details](https://egonw.github.io/journal-guidances-template/code/${instruction.text()})"
   } else if (line.startsWith("<section")) {
     def instruction = new XmlSlurper().parseText(line)
     println "<a name=\"sec:${instruction.@label}\"></a>"
